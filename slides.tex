@@ -1,0 +1,183 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}% -> pour les accents
+\usepackage[T1]{fontenc}
+%\usepackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[english]{babel} % -> en francais
+\usepackage{amsmath} % -> symboles mathématiques. amsmath inclut d'autres packages pour écrire en math comme amssymb,amstext, ...
+\usepackage{hhline}% -> package supplémentaire permettant le double soulignement
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx} % -> pour pouvoir mettre des dessins
+
+\usepackage[toc,page]{appendix}
+\usepackage{url}
+\usepackage{color}
+\usepackage{shadow}
+\usepackage{fancybox}
+\usepackage[babel=true]{csquotes}
+\usepackage{bigfoot} % pour utiliser \verb dans une footnote
+\usepackage{bm}
+
+\def\N{\mathbb{N}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+
+\author{Cédric Simal}
+\date{\today}
+\title{Do you believe in Real numbers?}
+
+
+\usetheme{Boxes}
+
+\setbeamertemplate{navigation symbols}{
+	\hspace{1em} \usebeamerfont{footline} \insertframenumber/\inserttotalframenumber }
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Motivation}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Philosophical Hazards}
+\framesubtitle{Side effects of this talk may include}
+\begin{itemize}[<+->]
+    \item Indifference
+    \item Mild interest
+    \item Five stages of grief
+    \item Constructivism
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Today's menu}
+    \begin{enumerate}
+        \item The arithmetic definition of real numbers
+        \item Computable numbers
+        \item Algorithmically random numbers
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Peano Axioms (1889)}
+    \begin{columns}
+        \begin{column}{.75\textwidth}
+            \begin{enumerate}
+                \item 0 is a natural number
+                \item If $n$ is a natural number, its successor $S(n)$ is a natural number
+                \item For all $n$, $S(n) \neq 0$
+                \item For all $m$, $n$, $S(m) \neq S(n) \Rightarrow m \neq n$
+            \end{enumerate}
+        \end{column}
+        \begin{column}{.25\textwidth}
+            \includegraphics[height=.25\textheight]{images/Giuseppe_Peano.jpg}
+            \vfill
+        \end{column}
+    \end{columns}
+    \vspace{2.5em}
+    \pause[2]
+    We call $\N = \{ 0, S(0), S(S(0)), \dots \}$ the set of natural numbers.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Arithmetic on Peano numbers}
+    \framesubtitle{Addition and multiplication are defined recursively}
+    For all $m$, $n \in \N$
+    \begin{itemize}
+        \item $m+0 = m$, and $m+S(n) = S(m+n)$
+        \item $m * 0 = 0$, and $m * S(n) = m*n + m$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Integers}
+    $$\Z = \{ (m,n) ~|~m,n \in \N \}, $$ 
+    where $(m,n)$ is interpreted as $m-n$.
+
+    \vspace{2.5em}
+    Relations on $\Z$:
+    \begin{itemize}
+        \item $(m_1,n_1) = (m_2,n_2) ~\Leftrightarrow m_1 + n_2 = m_2 + n_1$
+        \item $(m_1,n_1) < (m_2,n_2) ~\Leftrightarrow m_1 + n_2 < m_2 + n_1$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Arithmetic on Integers}
+    \begin{itemize}
+        \item $(m_1,n_1) + (m_2,n_2) = (m_1+m_2, n_1, n_2) $
+        \item $(m_1,n_1) * (m_2,n_2) = (m_1*m_2 + n_1*n_2, m_1*n_2 + m_2*n_1)$
+        \item $-(m,n) = (n,m)$ (Additive inverse)
+    \end{itemize}
+
+    \pause[2]
+    \vspace{2.5em}
+    $(\Z, +, *)$ is a \textit{ring}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Rationals}
+    $$ \Q = \{ (p,q)~| p,q \in \Z, q > 0 \}, $$
+    where $(p,q)$ is interpreted as $\frac{p}{q}$.
+
+    \vspace{2.5em}
+    Relations on $\Q$
+    \begin{itemize}
+        \item $(p_1, q_1) = (p_2,q_2) \Leftrightarrow p_1 * q_2 = p_2 * q_1$
+        \item $(p_1, q_1) < (p_2,q_2) \Leftrightarrow p_1 * q_2 < p_2 * q_1$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Arithmetic on Rationals}
+    \begin{itemize}
+        \item $(p_1,q_1) + (p_2,q_2) = (p_1*q_2 + p_2*q_1, q_1*q_2)$
+        \item $(p_1,q_1) * (p_2,q_2) = (p_1*p_2,q_1*q_2)$
+        \item $(p,q)^{-1} = (q,p)$ (Multiplicative inverse)
+    \end{itemize}
+
+    \pause[2]
+    \vspace{2.5em}
+    $(\Q, +, *)$ is a \textit{field}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dedekind cuts}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Interlude}
+    \framesubtitle{Fun problems if you're bored}
+    \begin{itemize}
+        \item Explicitly define a bijection between $\mathcal{P}(\N)$ and $[0,+\infty)$.
+        \item Show that the set of continuous functions from $\R$ to $\R$ has the same cardinality as $\R$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Definable numbers}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Computable numbers}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+\end{frame}
+
+\begin{frame}
+    \frametitle{That's all folks}
+    Slides and references can be found at
+    \url{https://github.com/csimal/are-real-numbers-real}
+\end{frame}
+
+\end{document}
