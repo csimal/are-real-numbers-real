@@ -41,18 +41,19 @@
 
 \begin{frame}
 \frametitle{Motivation}
-
-
+\begin{center}
+    \includegraphics[width=.9\textwidth]{images/books.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Philosophical Hazards}
 \framesubtitle{Side effects of this talk may include}
-\begin{itemize}[<+->]
+\begin{itemize}
     \item Indifference
     \item Mild interest
     \item Five stages of grief
-    \item Constructivism
+    \item Intuitionism
 \end{itemize}
 
 \end{frame}
@@ -78,12 +79,12 @@
             \end{enumerate}
         \end{column}
         \begin{column}{.25\textwidth}
-            \includegraphics[height=.25\textheight]{images/Giuseppe_Peano.jpg}
+            \includegraphics[height=.25\textheight]{images/Giuseppe_Peano.png}
             \vfill
         \end{column}
     \end{columns}
     \vspace{2.5em}
-    \pause[2]
+    %\pause[2]
     We call $\N = \{ 0, S(0), S(S(0)), \dots \}$ the set of natural numbers.
 \end{frame}
 
@@ -95,6 +96,11 @@
         \item $m+0 = m$, and $m+S(n) = S(m+n)$
         \item $m * 0 = 0$, and $m * S(n) = m*n + m$
     \end{itemize}
+
+    \vspace{2.5em}
+    $+$ and $*$ are associative and commutative. 
+
+    $*$ is distributive over $+$.
 \end{frame}
 
 \begin{frame}
@@ -113,12 +119,12 @@
 \begin{frame}
     \frametitle{Arithmetic on Integers}
     \begin{itemize}
-        \item $(m_1,n_1) + (m_2,n_2) = (m_1+m_2, n_1, n_2) $
+        \item $(m_1,n_1) + (m_2,n_2) = (m_1+m_2, n_1+n_2) $
         \item $(m_1,n_1) * (m_2,n_2) = (m_1*m_2 + n_1*n_2, m_1*n_2 + m_2*n_1)$
         \item $-(m,n) = (n,m)$ (Additive inverse)
     \end{itemize}
 
-    \pause[2]
+    %\pause[2]
     \vspace{2.5em}
     $(\Z, +, *)$ is a \textit{ring}.
 \end{frame}
@@ -144,34 +150,110 @@
         \item $(p,q)^{-1} = (q,p)$ (Multiplicative inverse)
     \end{itemize}
 
-    \pause[2]
+    %\pause[2]
     \vspace{2.5em}
     $(\Q, +, *)$ is a \textit{field}.
 \end{frame}
 
 \begin{frame}
     \frametitle{Dedekind cuts}
-\end{frame}
+    \framesubtitle{No relation with the Snyder cut}
+    A real number is a set $L \subset \Q$ with an upper bound and such that if $s \in L$ and $t < s$, then $t \in L$, e.g.
+    $$ \sqrt{2} = \{ q \in \Q ~|~ q \le 0 \vee q^2 \le 2 \} $$
 
-\begin{frame}
-    \frametitle{Interlude}
-    \framesubtitle{Fun problems if you're bored}
+    \vspace{2.5em}
+    Relations on $\R$
     \begin{itemize}
-        \item Explicitly define a bijection between $\mathcal{P}(\N)$ and $[0,+\infty)$.
-        \item Show that the set of continuous functions from $\R$ to $\R$ has the same cardinality as $\R$
+        \item $L_1 = L_2$ (set equality)
+        \item $L_1 < L_2 \Leftrightarrow L_1 \subset L_2$
     \end{itemize}
+
+    Arithmetic operations are left as an exercise.
 \end{frame}
 
 \begin{frame}
-    \frametitle{Definable numbers}
+    \frametitle{Computable numbers (Turing 1936)}
+    \begin{columns}
+        \begin{column}{.75\textwidth}
+            A real number $x$ is \textit{computable} if its decimal expansion can be computed to an arbitrary precision using a Turing machine.
+
+            \vspace{2em}
+            Equivalently,
+            \begin{itemize}
+                \item There exists a computable function that, given $\varepsilon >0$, produces a rational $q$ such that $|x-q| < \varepsilon$
+                \item The characteristic function of $x$, taken as a Dedekind cut is computable
+            \end{itemize}
+        \end{column}
+        \begin{column}{.25\textwidth}
+            \includegraphics[height=.25\textheight]{images/Turing.png}
+            \vfill
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Computable numbers}
+    Computable numbers contain
+    \begin{itemize}
+        \item rational numbers (trivially)
+        \item algebraic numbers (by using Newton's method)
+        \item $e$, $\pi$
+        \item computable functions ($\sin$, $\cos$, $\exp$, \dots) of computable numbers
+    \end{itemize}
+    
+    \vspace{2em}
+    However, computable numbers are \textit{countable}!
 \end{frame}
 
 \begin{frame}
-    \frametitle{}
+    \frametitle{Kolmogorov complexity}
+    \framesubtitle{aka Program size complexity, algorithmic entropy}
+    The Kolmogorov complexity $K_A(s)$ of a sequence $s=(s_1, \dots, s_n)$ in a given language $A$ is the length of the shortest program in $A$ that computes $s$.
+
+    \vspace{2.5em}
+    "0101010101010101" $\longrightarrow$ \texttt{"01" * 8}
+
+    "0010100111010101" $\longrightarrow$ \texttt{"0010100111010101"}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Algorithmically random numbers (Martin-Löf 1966)}
+    \begin{columns}
+        \begin{column}{.75\textwidth}
+            A real number is algorithmically random if the Kolmogorov complexity of its truncated (binary) expansion is "maximal" ($\sim$ diverges)
+        \end{column}
+        \begin{column}{.25\textwidth}
+            \includegraphics[height=.25\textheight]{images/Per_Martin-Lof.png}
+            \vfill
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Properties of ARNs}
+    Algorithmically Random Numbers are
+    \begin{itemize}
+        \item not computable (and vice versa)
+        \item incompressible ($\sim$ entropy)
+        \item indistinguishable from random noise by any statistical test
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Closing thoughts}
+    \framesubtitle{Several interesting questions}
+    \begin{itemize}
+        \item Do non computable real numbers actually exist?
+        \item If not, what does it say about the use of real numbers in applied maths?
+        \item Is there such a thing as "fundamental randomness", and is it ARNs?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/numbers.png}
+    \end{center}
 \end{frame}
 
 \begin{frame}
